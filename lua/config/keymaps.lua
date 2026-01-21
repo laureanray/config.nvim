@@ -1,0 +1,77 @@
+local opts = { noremap = true, silent = false }
+local map = vim.api.nvim_set_keymap
+
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-l>", "<C-w>l", opts)
+
+map("v", "J", ":m '>+1<CR>gv=gv", opts)
+map("v", "K", ":m '<-2<CR>gv=gv", opts)
+
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+
+-- Greatest REMAP ever, sabi ni Prime
+map("x", "<leader>p", '"_dp', opts)
+
+map("n", "Q", "<nop>", opts)
+map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", opts)
+
+map("n", "<C-k>", "<cmd>cnext<CR>zz", opts)
+map("n", "<C-j>", "<cmd>cprev<CR>zz", opts)
+map("n", "<leader>k", "<cmd>lnext<CR>zz", opts)
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
+map("n", "<leader>j", "<cmd>lprev<CR>zz", opts)
+
+-- Magic buffer-picking mode
+map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
+-- Sort automatically by...
+map("n", "<leader>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
+map("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", opts)
+map("n", "<leader>bl", "<Cmd>BufferOrderByLanguage<CR>", opts)
+map("n", "<leader>bw", "<Cmd>BufferOrderByWindowNumber<CR>", opts)
+
+-- Move whichkey mapping to one place
+-- d = { ":lua require('telescope.builtin').find_files({ cwd = '~/Projects/config' })<cr>", "Neovim Config" },
+map("n", "<leader>d", "<Cmd>lua require('telescope.builtin').find_files({ cwd = '~/Projects/config' })<cr>", opts)
+
+map("n", "<leader>x", "<Cmd>bdelete<cr>", opts)
+map("n", "<leader>x", "<Cmd>lua vim.lsp.buf.format()<cr>", opts)
+map(
+	"n",
+	"<leader>o",
+	"<Cmd>lua require('telescope.builtin').find_files({ find_command = {'rg', '--hidden', '--files', '-g', '!.git'}})<cr>",
+	opts
+)
+map("n", "<leader>p", "<Cmd>Telescope git_files<cr>", opts)
+map("n", "<leader>l", "<Cmd>Telescope live_grep<cr>", opts)
+map("n", "<leader>cc", "<Cmd>Telescope git_commits<cr>", opts)
+map("n", "<leader>cpd", "<Cmd>lua require('goto-preview').goto_preview_definition()<cr>", opts)
+map("n", "<leader>cd", "<Cmd>Telescope diagnostics<cr>", opts)
+map("n", "<leader>gg", "<Cmd>LazyGit<cr>", opts)
+map("n", "<leader>ga", "<Cmd>G add .<cr>", opts)
+map("n", "<leader>gc", "<Cmd>G commit<cr>", opts)
+map("n", "<leader>gp", "<Cmd>G push<cr>", opts)
+map("n", "<leader>gC", "<Cmd>G checkout -b ", opts)
+map("n", "<leader>gP", "<Cmd>G pull<cr>", opts)
+map("n", "<leader>gj", "<Cmd>diffget //2<cr>", opts)
+map("n", "<leader>gk", "<Cmd>diffget //3<cr>", opts)
+map("n", "<leader>q", "<Cmd>copen<cr>", opts)
+map("n", "<leader>Q", "<Cmd>close<cr>", opts)
+-- map("n", "gp", "<Cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
+map("x", "<C-_>", ":'<,'>CommentToggle<CR>gv", opts)
+map("n", "<leader>f", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
+map("n", "<leader>/", "<Cmd>Telescope current_buffer_fuzzy_find theme=dropdown<CR>", opts)
+
+map("n", "<leader>H", ":lua vim.lsp.inlay_hint(0, nil)<CR>", opts)
+map("n", "<leader>h", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+map("n", "<leader>m", ":lua require('harpoon.mark').add_file()<CR>", opts)
+map("n", "<A-.>", ":lua require('harpoon.ui').nav_next()<CR>", opts)
+map("n", "<A-,>", ":lua require('harpoon.ui').nav_prev()<CR>", opts)
+map("n", "<A-1>", ":lua require('harpoon.ui').nav_file(1)<CR>", opts)
+map("n", "<A-2>", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
+map("n", "<A-3>", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
+map("n", "<A-4>", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
+
+map("n", "<leader>ee", "oif err != nil {<CR>}<Esc>O return err", opts)
